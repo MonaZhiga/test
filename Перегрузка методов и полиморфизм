@@ -1,0 +1,50 @@
+using System;
+
+namespace OverloadingExample
+{
+    class Geometry
+    {
+        // Объем куба
+        public double Volume(double a)
+        {
+            return a * a * a;
+        }
+
+        // Объем прямоугольного параллелепипеда
+        public double Volume(double a, double b, double c)
+        {
+            return a * b * c;
+        }
+
+        // Объем цилиндра
+        public double Volume(double r, double h, string type)
+        {
+            if (type == "cylinder")
+                return Math.PI * r * r * h;
+            else
+                throw new ArgumentException("Неизвестный тип фигуры");
+        }
+
+        // Объем шара
+        public double Volume(string type, double r)
+        {
+            if (type == "sphere")
+                return (4.0 / 3.0) * Math.PI * r * r * r;
+            else
+                throw new ArgumentException("Неизвестный тип фигуры");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Geometry g = new Geometry();
+
+            Console.WriteLine($"Объем куба со стороной 2 равен {g.Volume(2):F2}.");
+            Console.WriteLine($"Объем параллелепипеда 2x3x4 равен {g.Volume(2, 3, 4):F2}.");
+            Console.WriteLine($"Объем цилиндра с радиусом 3 и высотой 5 равен {g.Volume(3, 5, \"cylinder\"):F2}.");
+            Console.WriteLine($"Объем шара с радиусом 3 равен {g.Volume(\"sphere\", 3):F2}.");
+        }
+    }
+}
