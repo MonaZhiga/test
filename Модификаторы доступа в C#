@@ -1,0 +1,41 @@
+using System;
+
+namespace WheatCostCalculator
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.Title = "Себестоимость пшеницы";
+
+            Console.Write("Введите начальную урожайность (B, ц/га): ");
+            double B = double.Parse(Console.ReadLine());
+
+            Console.Write("Введите начальные затраты (D, руб./га): ");
+            double D = double.Parse(Console.ReadLine());
+
+            Console.Write("Введите процент уменьшения урожайности в год (r): ");
+            double r = double.Parse(Console.ReadLine());
+
+            Console.Write("Введите процент увеличения затрат в год (q): ");
+            double q = double.Parse(Console.ReadLine());
+
+            Console.Write("Введите количество лет (N): ");
+            int N = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("\nГод\tУрожайность\tЗатраты\t\tСебестоимость (руб./ц)");
+
+            for (int year = 1; year <= N; year++)
+            {
+                B *= (1 - r / 100.0);
+                D *= (1 + q / 100.0);
+                double costPerCentner = D / B;
+
+                Console.WriteLine($"{year}\t{B:F2}\t\t{D:F2}\t\t{costPerCentner:F2}");
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу для выхода...");
+            Console.ReadKey();
+        }
+    }
+}
