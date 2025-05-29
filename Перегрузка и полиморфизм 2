@@ -1,0 +1,68 @@
+using System;
+
+namespace PolymorphismExample
+{
+    abstract class Figure
+    {
+        public abstract double Volume();
+    }
+
+    class Cube : Figure
+    {
+        public double A { get; set; }
+
+        public override double Volume()
+        {
+            return A * A * A;
+        }
+    }
+
+    class Parallelepiped : Figure
+    {
+        public double A { get; set; }
+        public double B { get; set; }
+        public double C { get; set; }
+
+        public override double Volume()
+        {
+            return A * B * C;
+        }
+    }
+
+    class Cylinder : Figure
+    {
+        public double R { get; set; }
+        public double H { get; set; }
+
+        public override double Volume()
+        {
+            return Math.PI * R * R * H;
+        }
+    }
+
+    class Sphere : Figure
+    {
+        public double R { get; set; }
+
+        public override double Volume()
+        {
+            return (4.0 / 3.0) * Math.PI * R * R * R;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Figure cube = new Cube { A = 2 };
+            Figure parallelepiped = new Parallelepiped { A = 2, B = 3, C = 4 };
+            Figure cylinder = new Cylinder { R = 3, H = 5 };
+            Figure sphere = new Sphere { R = 3 };
+
+            Console.WriteLine($"Объем куба со стороной 2 равен {cube.Volume():F2}.");
+            Console.WriteLine($"Объем параллелепипеда 2x3x4 равен {parallelepiped.Volume():F2}.");
+            Console.WriteLine($"Объем цилиндра с радиусом 3 и высотой 5 равен {cylinder.Volume():F2}.");
+            Console.WriteLine($"Объем шара с радиусом 3 равен {sphere.Volume():F2}.");
+        }
+    }
+}
